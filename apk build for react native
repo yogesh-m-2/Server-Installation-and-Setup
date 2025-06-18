@@ -1,0 +1,37 @@
+
+
+install java
+apt install openjdk-17-jdk
+
+apt install curl
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+nvm install node
+
+wget https://dl.google.com/android/repository/commandlinetools-linux-13114758_latest.zip
+
+apt install unzip
+
+mkdir -p $HOME/Android/cmdline-tools
+unzip commandlinetools-linux-*.zip -d $HOME/Android/cmdline-tools/
+mv $HOME/Android/cmdline-tools/cmdline-tools $HOME/Android/cmdline-tools/latest
+
+export ANDROID_HOME=$HOME/Android
+export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH
+
+source ~/.bashrc
+
+
+sdkmanager --sdk_root=${ANDROID_HOME} --licenses
+sdkmanager --sdk_root=${ANDROID_HOME} "platform-tools" "platforms;android-33" "build-tools;33.0.0"
+
+go to android folder and
+./gradlew assembleRelease
+
+
+
+
